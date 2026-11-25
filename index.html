@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Допуск — платный канал в MAX за 5 минут</title>
+<meta name="description" content="Платный закрытый канал или клуб в MAX: оплата по СБП и карте, бот сам выдаёт доступ и убирает должников. Одна подписка работает в MAX и Telegram.">
+<!-- Яндекс Метрика: вставьте сюда код счётчика. Цель на отправку формы называется "lead". -->
+<style>
+  :root{
+    --bg:#fbfaf7; --ink:#16181d; --muted:#5d6470; --line:#e6e3dc;
+    --accent:#2f5bff; --accent-ink:#fff; --soft:#eef2ff; --ok:#1f8a4c;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5;font-size:17px}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+  header{padding:18px 0}
+  header .wrap{display:flex;align-items:center;justify-content:space-between}
+  .logo{font-weight:800;font-size:20px;letter-spacing:-.02em}
+  .logo span{color:var(--accent)}
+  .btn{display:inline-block;background:var(--accent);color:var(--accent-ink);border:0;border-radius:999px;padding:14px 26px;font-size:17px;font-weight:600;text-decoration:none;cursor:pointer;transition:transform .15s,opacity .15s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn:disabled{opacity:.6;cursor:default;transform:none}
+  .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line);padding:9px 18px;font-size:15px}
+  .hero{padding:48px 20px 56px}
+  .badge{display:inline-block;background:var(--soft);color:var(--accent);font-weight:600;font-size:14px;padding:6px 12px;border-radius:999px;margin-bottom:18px}
+  h1{font-size:clamp(34px,5.4vw,58px);line-height:1.05;letter-spacing:-.03em;margin:0 0 18px;max-width:820px}
+  .lead{font-size:clamp(18px,2.2vw,21px);color:var(--muted);max-width:680px;margin:0 0 28px}
+  .hero-note{margin-top:14px;font-size:14px;color:var(--muted)}
+  section{padding:56px 0;border-top:1px solid var(--line)}
+  h2{font-size:clamp(26px,3.6vw,36px);letter-spacing:-.02em;margin:0 0 28px;line-height:1.15}
+  .grid{display:grid;gap:18px}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .card h3{margin:0 0 8px;font-size:19px}
+  .card p{margin:0;color:var(--muted)}
+  .step{font-weight:800;color:var(--accent);font-size:15px;margin-bottom:8px}
+  .split{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start}
+  @media (max-width:820px){.split{grid-template-columns:1fr}}
+  .list{list-style:none;padding:0;margin:0}
+  .list li{padding:10px 0 10px 30px;position:relative;border-bottom:1px solid var(--line)}
+  .list li:last-child{border-bottom:0}
+  .list li::before{content:"";position:absolute;left:4px;top:18px;width:12px;height:7px;border-left:2.5px solid var(--ok);border-bottom:2.5px solid var(--ok);transform:rotate(-45deg)}
+  .price{background:var(--ink);color:#fff;border-radius:var(--radius);padding:28px}
+  .price .sum{font-size:52px;font-weight:800;letter-spacing:-.03em;line-height:1}
+  .price .per{color:#b9bec8;margin:6px 0 18px}
+  .price p{color:#d6d9df;margin:0 0 10px;font-size:15px}
+  form{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+  label{display:block;font-weight:600;font-size:15px;margin:14px 0 6px}
+  label .opt{font-weight:400;color:var(--muted)}
+  input[type=text],select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-size:16px;background:#fff;color:var(--ink)}
+  input:focus,select:focus{outline:none;border-color:var(--accent)}
+  .check{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:14px;color:var(--muted);margin-top:16px}
+  .check input{margin-top:3px}
+  .form-foot{margin-top:18px}
+  .msg{margin-top:14px;font-size:15px}
+  .msg.ok{color:var(--ok);font-weight:600}
+  .msg.err{color:#b3261e}
+  details{border-bottom:1px solid var(--line);padding:16px 0}
+  summary{cursor:pointer;font-weight:600;font-size:18px;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";float:right;color:var(--muted)}
+  details[open] summary::after{content:"−"}
+  details p{color:var(--muted);margin:10px 0 0}
+  footer{padding:32px 0 48px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+  footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">Допуск<span>.</span></div>
+    <a class="btn ghost" href="#form">Ранний доступ</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div class="badge">Для авторов, экспертов и клубов</div>
+    <h1>Платный канал в MAX за&nbsp;5&nbsp;минут</h1>
+    <p class="lead">Подписчики платят по СБП и карте. Бот сам выдаёт доступ, продлевает подписку и убирает тех, кто не оплатил. Одна подписка работает и в MAX, и в Telegram — переезжайте без потери платящей аудитории.</p>
+    <a class="btn" href="#form">Встать в лист ожидания</a>
+    <div class="hero-note">Сервис в разработке. Первыми подключим авторов из листа ожидания.</div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <h2>Как это работает</h2>
+      <div class="grid g3">
+        <div class="card"><div class="step">Шаг 1</div><h3>Добавляете бота в канал</h3><p>Закрытый канал или чат в MAX — назначаете бота администратором. Без конструкторов и сценариев.</p></div>
+        <div class="card"><div class="step">Шаг 2</div><h3>Ставите цену</h3><p>Месячная подписка, доступ на срок или разовая оплата. Получаете ссылку на оплату для своих постов.</p></div>
+        <div class="card"><div class="step">Шаг 3</div><h3>Бот работает за вас</h3><p>Пускает оплативших, напоминает о продлении, удаляет должников. Вы видите выручку и подписчиков в одном месте.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap split">
+      <div>
+        <h2>Зачем это авторам, которые уходят из Telegram</h2>
+        <ul class="list">
+          <li>Одна подписка открывает доступ и в MAX, и в Telegram — платящие подписчики переходят тогда, когда им удобно</li>
+          <li>Оплата по СБП и картам российских банков</li>
+          <li>Автопродление и напоминания перед окончанием подписки</li>
+          <li>Автоматическое удаление тех, кто не продлил</li>
+          <li>Подходит для самозанятых, ИП и компаний</li>
+          <li>Закрытые каналы, чаты-клубы, курсы с доступом на срок</li>
+        </ul>
+      </div>
+      <div class="price">
+        <div class="sum">990 ₽</div>
+        <div class="per">в месяц за ваш канал</div>
+        <p>Фиксированная цена, без процента с ваших продаж.</p>
+        <p>Комиссия платёжной системы за приём оплат — отдельно.</p>
+        <a class="btn" href="#form" style="margin-top:10px">Хочу ранний доступ</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="form">
+    <div class="wrap split">
+      <div>
+        <h2>Лист ожидания</h2>
+        <p class="lead" style="font-size:18px">Оставьте контакт — напишем, как только откроем подключение. Пара вопросов про ваш канал помогут нам сделать сервис под реальные задачи.</p>
+      </div>
+      <form id="leadForm" novalidate>
+        <label for="name">Как к вам обращаться</label>
+        <input type="text" id="name" name="name" autocomplete="name" required>
+
+        <label for="contact">Контакт для связи</label>
+        <input type="text" id="contact" name="contact" placeholder="Телефон, ник в MAX или Telegram, почта" required>
+
+        <label for="channel">Ссылка на канал <span class="opt">— если есть</span></label>
+        <input type="text" id="channel" name="channel" placeholder="max.ru/… или t.me/…">
+
+        <label for="size">Сколько подписчиков</label>
+        <select id="size" name="size" required>
+          <option value="">Выберите</option>
+          <option>Канала пока нет</option>
+          <option>До 1 000</option>
+          <option>1 000 – 10 000</option>
+          <option>10 000 – 50 000</option>
+          <option>Больше 50 000</option>
+        </select>
+
+        <label for="platform">Где сейчас ваша аудитория</label>
+        <select id="platform" name="platform" required>
+          <option value="">Выберите</option>
+          <option>Telegram</option>
+          <option>MAX</option>
+          <option>Telegram и MAX</option>
+          <option>ВКонтакте</option>
+          <option>Другое</option>
+        </select>
+
+        <label for="paid">Уже продаёте платный доступ?</label>
+        <select id="paid" name="paid" required>
+          <option value="">Выберите</option>
+          <option>Да, в Telegram</option>
+          <option>Да, в MAX</option>
+          <option>Да, другим способом</option>
+          <option>Нет, только планирую</option>
+        </select>
+
+        <label class="check"><input type="checkbox" id="consent" required> <span>Согласен на обработку персональных данных в соответствии с <a href="#" id="policyLink">политикой конфиденциальности</a></span></label>
+
+        <div class="form-foot"><button class="btn" type="submit" id="submitBtn">Встать в лист ожидания</button></div>
+        <div class="msg" id="msg" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Вопросы</h2>
+      <details><summary>Когда можно будет подключиться?</summary><p>Сервис в разработке. Мы откроем подключение сначала для авторов из листа ожидания и напишем каждому лично.</p></details>
+      <details><summary>Нужно ли ИП?</summary><p>Принимать оплату через бота в MAX могут ИП, компании и самозанятые.</p></details>
+      <details><summary>Что если у меня канал только в Telegram?</summary><p>Подойдёт. Подписка будет открывать доступ в Telegram сейчас и в MAX — когда решите переехать.</p></details>
+      <details><summary>Есть ли процент с продаж?</summary><p>Нет. Вы платите 990 ₽ в месяц за канал, а комиссию за приём платежей берёт платёжная система.</p></details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© Допуск, 2026 · <a href="#" id="policyLinkFooter">Политика конфиденциальности</a><br>MAX и Telegram — товарные знаки их правообладателей. Сервис не связан с ними официально.</div>
+</footer>
+
+<script>
+  // 1) Вставьте сюда URL веб-приложения Google Apps Script (заканчивается на /exec)
+  var ENDPOINT = "https://script.google.com/macros/s/AKfycbzb7uD_xmvP0194tXaVtfTfCz5r_eZGLmr_ihzpwEMiW3D2s0WRgBB6rvSm0b61oDjH3A/exec";
+  // 2) Ссылка на страницу политики конфиденциальности
+  var POLICY_URL = "#";
+
+  document.getElementById("policyLink").href = POLICY_URL;
+  document.getElementById("policyLinkFooter").href = POLICY_URL;
+
+  var params = new URLSearchParams(location.search);
+  var form = document.getElementById("leadForm");
+  var msg = document.getElementById("msg");
+  var btn = document.getElementById("submitBtn");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    msg.className = "msg"; msg.textContent = "";
+    var f = form.elements;
+    var name = f["name"].value.trim(), contact = f["contact"].value.trim();
+    if (!name || !contact || !f["size"].value || !f["platform"].value || !f["paid"].value) {
+      msg.className = "msg err"; msg.textContent = "Заполните, пожалуйста, все обязательные поля."; return;
+    }
+    if (!document.getElementById("consent").checked) {
+      msg.className = "msg err"; msg.textContent = "Нужно согласие на обработку персональных данных."; return;
+    }
+    var data = new URLSearchParams({
+      name: name, contact: contact, channel: f["channel"].value.trim(),
+      size: f["size"].value, platform: f["platform"].value, paid: f["paid"].value,
+      utm_source: params.get("utm_source") || "", utm_medium: params.get("utm_medium") || "",
+      utm_campaign: params.get("utm_campaign") || "", utm_term: params.get("utm_term") || "",
+      referrer: document.referrer || "", page: location.href
+    });
+    btn.disabled = true; btn.textContent = "Отправляем…";
+    fetch(ENDPOINT, { method: "POST", mode: "no-cors", body: data })
+      .then(function () {
+        form.reset();
+        msg.className = "msg ok"; msg.textContent = "Готово! Вы в листе ожидания — напишем, когда откроем подключение.";
+        if (typeof ym === "function" && window.YM_ID) { ym(window.YM_ID, "reachGoal", "lead"); }
+      })
+      .catch(function () {
+        msg.className = "msg err"; msg.textContent = "Не получилось отправить. Попробуйте ещё раз через минуту.";
+      })
+      .finally(function () { btn.disabled = false; btn.textContent = "Встать в лист ожидания"; });
+  });
+</script>
+</body>
+</html>
